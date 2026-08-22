@@ -1,13 +1,11 @@
 # Updates
 
-1. download https://github.com/facebookresearch/omnivore in setup.sh. The original model loading is not working.
+1. Download the Omnivore repository from GitHub in setup.sh, as the original model-loading implementation is no longer working.
 
-what the code has done is to replace:
+The code replaces the original model-loading approach with:
 
 ```
- # self.encoder = torch.hub.load(
-        #     "facebookresearch/omnivore", model="omnivore_swinT", pretrained=pretrained)
-
+ self.encoder = torch.hub.load("facebookresearch/omnivore", model="omnivore_swinT", pretrained=pretrained)
 ```
 
 With:
