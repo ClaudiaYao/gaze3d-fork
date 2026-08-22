@@ -11,7 +11,7 @@ import av
 import cv2
 import numpy as np
 import pandas as pd
-from decord import VideoReader
+# from decord import VideoReader
 from PIL import Image
 from torch.utils.data import Dataset
 from torchvision.transforms import Compose

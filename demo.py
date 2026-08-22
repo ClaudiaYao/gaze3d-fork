@@ -21,12 +21,15 @@ from matplotlib import colormaps
 from PIL import Image
 from torch.utils.data import DataLoader
 from tqdm import tqdm
+import pathlib
 
 from src.models.gat_model import GaT, HeadDict, MLPHead, Swin3D
 from utils_demo import DemoImageData, DemoVideoData, identify_modality
 
 warnings.simplefilter(action="ignore", category=FutureWarning)
 warnings.simplefilter(action="ignore", category=UserWarning)
+
+CWD = pathlib.Path.cwd()
 
 # ================================ ARGS ================================ #
 parser = argparse.ArgumentParser(description="Predict gaze on videos")
@@ -100,7 +103,8 @@ def load_tracker():
 
 def load_head_detection_model(device):
     # Load and return the pre-trained head detection model
-    ckpt_path = "./weights/crowdhuman_yolov5m.pt"
+    # ckpt_path = "./weights/crowdhuman_yolov5m.pt"
+    ckpt_path = str(CWD / "weights/crowdhuman_yolov5m.pt")
     model = torch.hub.load("ultralytics/yolov5", "custom", path=ckpt_path, verbose=False)
     model.conf = 0.25  # NMS confidence threshold
     model.iou = 0.45  # NMS IoU threshold
@@ -243,6 +247,7 @@ def draw_gaze(
     sim = F.hardtanh_(sim, min_val=-1.0, max_val=1.0)
     angle_gaze = torch.acos(sim)[0] * 180 / np.pi
     angle_gaze /= 180
+    # Claudia: The color of the gaze vector follows a gradient from blue (frontal gaze toward the camera) to green (gaze directed away from the camera). Red indicates a gaze perpendicular to the camera, appearing in the middle of the gradient.
     color = np.array(cmap(angle_gaze)[:3]) * 255
     image = draw_arrow2D(
         image=image,
@@ -604,3 +609,7 @@ if __name__ == "__main__":
         num_workers=args.num_workers,
     )
     demo.run()
+
+
+
+# python demo.py --input-filename data/pexels-jopwell-2422290.jpg --output-dir output/ --modality image

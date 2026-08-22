@@ -5,6 +5,7 @@
 # SPDX-License-Identifier: CC-BY-NC-4.0
 
 from functools import partial
+import pathlib
 from typing import List
 
 import einops
@@ -12,15 +13,28 @@ import torch
 from einops import rearrange
 from torch import nn
 from torch.nn import functional as F
+import pathlib
 
+CWD = pathlib.Path.cwd()
 
 class Swin3D(nn.Module):
     def __init__(self, pretrained=True):
         super().__init__()
 
-        self.encoder = torch.hub.load(
-            "facebookresearch/omnivore", model="omnivore_swinT", pretrained=pretrained
+        omnivore_path = (
+            str(CWD / "checkpoints" / "omnivore-main")
         )
+
+        self.encoder = torch.hub.load(
+            str(omnivore_path),
+            model="omnivore_swinT",
+            pretrained=pretrained,
+            source="local",
+        )
+
+        # self.encoder = torch.hub.load(
+        #     "facebookresearch/omnivore", model="omnivore_swinT", pretrained=pretrained
+        # )
         self.encoder = self.encoder.trunk
         self.output_features = self.encoder.num_features
 

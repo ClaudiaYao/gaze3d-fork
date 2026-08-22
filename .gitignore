@@ -9,3 +9,7 @@ app.py
 /.reuse
 
 .pre-commit-config.yaml
+
+.DS_Store
+checkpoints/.DS_Store
+checkpoints/omnivore-main/
