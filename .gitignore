@@ -13,3 +13,4 @@ app.py
 .DS_Store
 checkpoints/.DS_Store
 checkpoints/omnivore-main/
+staged_images/
