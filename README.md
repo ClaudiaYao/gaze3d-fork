@@ -22,7 +22,9 @@ self.encoder = torch.hub.load(
         )
 ```
 
-2. Add a few test_images
+2. update setup.sh to allow it to download and unpack Omnivore source into checkpoints/omnivore-main
+
+3. Add a few test_images
 
 # Usage: The usage is the same as in the original Gaze3D repository.
 
