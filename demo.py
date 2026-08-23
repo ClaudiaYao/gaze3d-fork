@@ -213,7 +213,7 @@ def draw_gaze(
     head_center = np.array([(xmin + xmax) // 2, (ymin + ymax) // 2])
     head_radius = max(xmax - xmin, ymax - ymin) // 2
     head_radius = int(head_radius * 1.2)  # enlarge the head circle
-    color = (255, 0, 0)  # red
+    color = (0, 0, 255)  # red in BGR format for OpenCV
     cv2.circle(image, head_center, head_radius + 1, color, thickness)  # head circle
 
     # Draw header
@@ -227,7 +227,7 @@ def draw_gaze(
         int(head_center[0] + w_text / 2),
         int(head_center[1] - head_radius - 1 + h_text + 5),
     )
-    cv2.rectangle(image, header_ul, header_br, color, -1)  # header bbox
+    cv2.rectangle(image, header_ul, header_br, (0, 0, 0), -1)  # header bbox
     cv2.putText(
         image,
         header_text,
