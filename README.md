@@ -26,6 +26,8 @@ self.encoder = torch.hub.load(
 
 3. Add a few test_images
 
+4. Update the arrow line color: deep red at the extreme "looking straight out at the viewer" end, yellow at the boundary (gaze parallel to the paper plane, z≈0), and blue at the extreme "looking straight into the paper/scene" end.
+
 # Usage: The usage is the same as in the original Gaze3D repository.
 
 1. First, we need to clone the repository

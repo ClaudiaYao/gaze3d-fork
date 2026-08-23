@@ -18,6 +18,7 @@ import torch
 import torch.nn.functional as F
 from boxmot import OCSORT
 from matplotlib import colormaps
+from matplotlib.colors import LinearSegmentedColormap
 from PIL import Image
 from torch.utils.data import DataLoader
 from tqdm import tqdm
@@ -68,7 +69,8 @@ args = parser.parse_args()
 
 
 # =============================== GLOBALS =============================== #
-CMAP = colormaps.get_cmap("brg")
+# Gaze direction color scale: red (toward camera) -> yellow (perpendicular/boundary) -> blue (away from camera)
+CMAP = LinearSegmentedColormap.from_list("gaze_direction", ["red", "yellow", "blue"])
 COLOR_NAMES = [
     "mediumvioletred",
     "green",
@@ -247,7 +249,7 @@ def draw_gaze(
     sim = F.hardtanh_(sim, min_val=-1.0, max_val=1.0)
     angle_gaze = torch.acos(sim)[0] * 180 / np.pi
     angle_gaze /= 180
-    # Claudia: The color of the gaze vector follows a gradient from blue (frontal gaze toward the camera) to green (gaze directed away from the camera). Red indicates a gaze perpendicular to the camera, appearing in the middle of the gradient.
+    # Claudia: The color of the gaze vector follows a gradient from red (gaze directed toward the camera, outward) to blue (gaze directed away from the camera, inward). Yellow indicates a gaze perpendicular to the camera, appearing at the boundary of the gradient.
     color = np.array(cmap(angle_gaze)[:3]) * 255
     image = draw_arrow2D(
         image=image,
