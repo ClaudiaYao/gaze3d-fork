@@ -46,3 +46,9 @@ conda activate gazeCVPR
 
 3. Download model for head detection:
    `bash setup.sh`
+
+4. run the inference on one single image:
+   `python demo.py --input-filename data/pexels-jopwell-2422290.jpg --output-dir output/ --modality image`
+
+5. run the inference on the folder `test-images`
+   `python run_test.py`

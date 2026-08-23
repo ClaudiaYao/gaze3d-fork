@@ -213,7 +213,7 @@ def draw_gaze(
     head_center = np.array([(xmin + xmax) // 2, (ymin + ymax) // 2])
     head_radius = max(xmax - xmin, ymax - ymin) // 2
     head_radius = int(head_radius * 1.2)  # enlarge the head circle
-    color = colors[head_pid % len(colors)]
+    color = (255, 0, 0)  # red
     cv2.circle(image, head_center, head_radius + 1, color, thickness)  # head circle
 
     # Draw header
