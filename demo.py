@@ -213,8 +213,8 @@ def draw_gaze(
     head_center = np.array([(xmin + xmax) // 2, (ymin + ymax) // 2])
     head_radius = max(xmax - xmin, ymax - ymin) // 2
     head_radius = int(head_radius * 1.2)  # enlarge the head circle
-    color = (0, 0, 255)  # red in BGR format for OpenCV
-    cv2.circle(image, head_center, head_radius + 1, color, thickness)  # head circle
+    color = (0, 255, 0)  # red in BGR format for OpenCV
+    cv2.circle(image, head_center, head_radius + 1, color, 3)  # head circle
 
     # Draw header
     header_text = f"P{int(head_pid)}"
@@ -227,14 +227,14 @@ def draw_gaze(
         int(head_center[0] + w_text / 2),
         int(head_center[1] - head_radius - 1 + h_text + 5),
     )
-    cv2.rectangle(image, header_ul, header_br, (0, 0, 0), -1)  # header bbox
+    cv2.rectangle(image, header_ul, header_br, (128, 128, 128), -1)  # header bbox
     cv2.putText(
         image,
         header_text,
         (header_ul[0], int(head_center[1] - head_radius - 1 + h_text)),
         cv2.FONT_HERSHEY_SIMPLEX,
         fs,
-        (255, 255, 255),
+        (0, 0, 0),
         1,
         cv2.LINE_AA,
     )  # header text
@@ -470,8 +470,8 @@ class Gaze3DDemo:
                         gaze,
                         CMAP,
                         COLORS,
-                        thickness=10,
-                        thickness_gaze=10,
+                        thickness=2,
+                        thickness_gaze=5,
                         fs=0.8,
                     )
 

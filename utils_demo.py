@@ -135,7 +135,7 @@ class DemoImageData(Dataset):
         self.input_modality = identify_modality(input_file_path)
 
     def __len__(self):
-        return len(self.detected_head)
+        return len(self.detected_head)  
 
     def __getitem__(self, idx):
         if self.input_modality == "video":

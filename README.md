@@ -2,7 +2,7 @@
 
 1. Download the Omnivore repository from GitHub in setup.sh, as the original model-loading implementation is no longer working.
 
-The code replaces the original model-loading approach with:
+The code replaces the original model-loading approach:
 
 ```
  self.encoder = torch.hub.load("facebookresearch/omnivore", model="omnivore_swinT", pretrained=pretrained)
@@ -28,7 +28,7 @@ self.encoder = torch.hub.load(
 
 4. Update the arrow line color: deep red at the extreme "looking straight out at the viewer" end, yellow at the boundary (gaze parallel to the paper plane, z≈0), and blue at the extreme "looking straight into the paper/scene" end.
 
-# Usage: The usage is the same as in the original Gaze3D repository.
+# Usage: The usage is the same as the original Gaze3D repository
 
 1. First, we need to clone the repository
 
